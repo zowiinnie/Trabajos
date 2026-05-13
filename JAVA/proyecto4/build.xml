@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="POS_Cafeteria" default="run" basedir=".">
+    <description>Builds and runs the POS_Cafeteria project.</description>
+    
+    <!-- Importación opcional para compatibilidad con la automatización interna de NetBeans -->
+    <import file="nbproject/build-impl.xml" optional="true"/>
+
+    <!-- Directorios -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="main.class" value="com.pos.cafeteria.PuntoDeVentaCafeteria"/>
+
+    <!-- Limpiar proyecto -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- Compilar -->
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" source="21" target="21"/>
+    </target>
+
+    <!-- Crear JAR -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/POS_Cafeteria.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Ejecutar -->
+    <target name="run" depends="jar">
+        <java jar="${dist.dir}/POS_Cafeteria.jar" fork="true"/>
+    </target>
+
+    <!-- Soporte para reconstrucción (Clean and Build) -->
+    <target name="rebuild" depends="clean,jar"/>
+
+</project>
